@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7m5p35breqkb"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_mhlb1"]
+[ext_resource type="Environment" uid="uid://cjau3e4i1ogfb" path="res://Environments/Void.tres" id="2_fe7bu"]
+[ext_resource type="Environment" uid="uid://bfpl4yimwb7yi" path="res://Environments/Normal.tres" id="2_p5j4a"]
+[ext_resource type="Material" uid="uid://spnsm5ws2375" path="res://textures/Light/02.tres" id="2_prpl0"]
+[ext_resource type="Material" uid="uid://dgm7sx3uo75qm" path="res://textures/Dark/01.tres" id="3_uqqji"]
+[ext_resource type="PackedScene" uid="uid://y3tfqhredlag" path="res://Scenes/fire_plate.tscn" id="5_de1es"]
+[ext_resource type="PackedScene" uid="uid://ca7rytr2o8lxf" path="res://Scenes/Interactables/button.tscn" id="7_1a25u"]
+
+[node name="Level0" type="Node3D"]
+script = ExtResource("1_mhlb1")
+normalEnvironment = ExtResource("2_p5j4a")
+voidEnvironment = ExtResource("2_fe7bu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_fe7bu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="main" type="Node3D" parent="."]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="main"]
+material_override = ExtResource("2_prpl0")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(10, 1, 10)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="main/CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+size = Vector3(10, 1, 10)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 2, 0)
+size = Vector3(1, 5, 10)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 2, 0)
+size = Vector3(1, 5, 10)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4.5)
+size = Vector3(8, 5, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -4.5)
+size = Vector3(8, 5, 1)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="main"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4, 0)
+spot_range = 8.0
+
+[node name="FirePlate" parent="main" instance=ExtResource("5_de1es")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.5, -2)
+burning = false
+
+[node name="Button" parent="main" instance=ExtResource("7_1a25u")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2, 1, -4)
+oneShot = true
+
+[node name="void" type="Node3D" parent="."]
+visible = false
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="void"]
+material_override = ExtResource("3_uqqji")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(20, 1, 20)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 9.5)
+size = Vector3(20, 9, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -9.5)
+size = Vector3(20, 9, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 4, 0)
+size = Vector3(1, 9, 18)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 4, 0)
+size = Vector3(1, 9, 18)
+
+[connection signal="pushed" from="main/Button" to="main/FirePlate" method="toggleBurn"]
