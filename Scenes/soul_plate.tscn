@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://q4fhbjd4d8hm"]
+
+[ext_resource type="Script" path="res://scripts/soul_plate.gd" id="1_0r2k3"]
+[ext_resource type="Material" uid="uid://cqfm37r04vbl4" path="res://textures/08.tres" id="2_qptb1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_li0ls"]
+size = Vector3(2, 3, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3fu7u"]
+top_radius = 2.0
+bottom_radius = 2.0
+height = 0.1
+
+[sub_resource type="Gradient" id="Gradient_07m0e"]
+offsets = PackedFloat32Array(0, 0.707317)
+colors = PackedColorArray(1, 0, 0.976471, 1, 0.45015, 0.166568, 0.643668, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vw2kn"]
+gradient = SubResource("Gradient_07m0e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ix0di"]
+lifetime_randomness = 1.0
+emission_shape_offset = Vector3(0, 3, 0)
+emission_shape = 1
+emission_sphere_radius = 1.75
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+color_ramp = SubResource("GradientTexture1D_vw2kn")
+turbulence_influence_min = 0.496
+turbulence_influence_max = 0.596
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_we3xl"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_wns5w"]
+material = SubResource("StandardMaterial3D_we3xl")
+size = Vector2(0.1, 1)
+
+[node name="soulPlate" type="Area3D"]
+script = ExtResource("1_0r2k3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_li0ls")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = ExtResource("2_qptb1")
+mesh = SubResource("CylinderMesh_3fu7u")
+
+[node name="Fire" type="GPUParticles3D" parent="."]
+cast_shadow = 0
+emitting = false
+amount = 500
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_ix0di")
+draw_pass_1 = SubResource("QuadMesh_wns5w")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

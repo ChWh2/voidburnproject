@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://yjefk62b6jiv"]
+
+[ext_resource type="Texture2D" uid="uid://6hfx3u0avoeo" path="res://textures/Sci-Fi_Padded_Fabric_002_SD/Sci-Fi_Padded_Fabric_002_basecolor.jpg" id="1_e5uf0"]
+[ext_resource type="Texture2D" uid="uid://bo5dkpjrwtl2o" path="res://textures/Sci-Fi_Padded_Fabric_002_SD/Sci-Fi_Padded_Fabric_002_ambientOcclusion.jpg" id="2_svsju"]
+[ext_resource type="Texture2D" uid="uid://bwiupbe7vuq84" path="res://textures/Sci-Fi_Padded_Fabric_002_SD/Sci-Fi_Padded_Fabric_002_metallic.jpg" id="4_t42g1"]
+[ext_resource type="Texture2D" uid="uid://ehm1j801akxo" path="res://textures/Sci-Fi_Padded_Fabric_002_SD/Sci-Fi_Padded_Fabric_002_normal.jpg" id="5_5fmiw"]
+[ext_resource type="Texture2D" uid="uid://d3gj4648ufc3p" path="res://textures/Sci-Fi_Padded_Fabric_002_SD/Sci-Fi_Padded_Fabric_002_roughness.jpg" id="6_gl6yn"]
+
+[resource]
+albedo_texture = ExtResource("1_e5uf0")
+metallic = 1.0
+metallic_texture = ExtResource("4_t42g1")
+roughness_texture = ExtResource("6_gl6yn")
+normal_enabled = true
+normal_texture = ExtResource("5_5fmiw")
+ao_enabled = true
+ao_texture = ExtResource("2_svsju")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true

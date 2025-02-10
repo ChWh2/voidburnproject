@@ -11,6 +11,7 @@ var alive := true
 @export var lockedMovement := false
 
 signal died
+signal revive
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -55,3 +56,9 @@ func die():
 
 func emitDie():
 	died.emit()
+
+func getRevive():
+	$AnimationPlayer.play("Revive")
+
+func emitRevive():
+	revive.emit()

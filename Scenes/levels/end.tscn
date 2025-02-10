@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://bavvcjsf6dafs"]
+
+[sub_resource type="GDScript" id="GDScript_0hl8o"]
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_de3rl"]
+font_size = 128
+outline_size = 64
+outline_color = Color(0, 0, 0, 1)
+
+[node name="end" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_0hl8o")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.641934, 0.641934, 0.641934, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -501.5
+offset_top = -176.5
+offset_right = 501.5
+offset_bottom = 176.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "You finished the 
+prototype!"
+label_settings = SubResource("LabelSettings_de3rl")
+horizontal_alignment = 1
+vertical_alignment = 1

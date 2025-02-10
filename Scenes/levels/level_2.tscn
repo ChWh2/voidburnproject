@@ -1,0 +1,205 @@
+[gd_scene load_steps=15 format=3 uid="uid://diuis5516d46u"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_blp8m"]
+[ext_resource type="Environment" uid="uid://bfpl4yimwb7yi" path="res://Environments/Normal.tres" id="2_26y8j"]
+[ext_resource type="Environment" uid="uid://cjau3e4i1ogfb" path="res://Environments/Void.tres" id="3_s6u1q"]
+[ext_resource type="Material" uid="uid://yjefk62b6jiv" path="res://textures/Sci-Fi_Padded_Fabric_002.tres" id="4_pydm0"]
+[ext_resource type="Material" uid="uid://c8dlq6bovgv13" path="res://textures/Fabric_Padded_Polyester_001.tres" id="5_65ab4"]
+[ext_resource type="PackedScene" uid="uid://b3ss483xjxny6" path="res://Scenes/enter_elevator.tscn" id="5_473xg"]
+[ext_resource type="Script" path="res://scripts/animationplayer.gd" id="6_bi4al"]
+[ext_resource type="PackedScene" uid="uid://ca7rytr2o8lxf" path="res://Scenes/Interactables/button.tscn" id="7_x6htm"]
+[ext_resource type="PackedScene" uid="uid://y3tfqhredlag" path="res://Scenes/fire_plate.tscn" id="8_0bmdk"]
+[ext_resource type="PackedScene" uid="uid://ctnr8ufwem0pp" path="res://Scenes/exitelevator.tscn" id="9_squsx"]
+[ext_resource type="PackedScene" uid="uid://q4fhbjd4d8hm" path="res://Scenes/soul_plate.tscn" id="11_0plwb"]
+
+[sub_resource type="Animation" id="Animation_srgmr"]
+resource_name = "."
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CSGCombiner3D/CSGBox3D3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(5.5, 2.5, 3.5), Vector3(5.5, 2.5, 8.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CSGCombiner3D/CSGBox3D4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(5.5, 2.5, -3.5), Vector3(5.5, 2.5, -8.5)]
+}
+
+[sub_resource type="Animation" id="Animation_66wbr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CSGCombiner3D/CSGBox3D3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(5.5, 2.5, 3.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CSGCombiner3D/CSGBox3D4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(5.5, 2.5, -3.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qg03g"]
+_data = {
+".": SubResource("Animation_srgmr"),
+"RESET": SubResource("Animation_66wbr")
+}
+
+[node name="level_2" type="Node3D"]
+script = ExtResource("1_blp8m")
+normalEnvironment = ExtResource("2_26y8j")
+voidEnvironment = ExtResource("3_s6u1q")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_s6u1q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="main" type="Node3D" parent="."]
+visible = false
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="main"]
+material_override = ExtResource("4_pydm0")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -1, -3.5)
+size = Vector3(7, 1, 25)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, -3.5)
+size = Vector3(7, 1, 25)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.5, -4)
+size = Vector3(1, 6, 26)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 6)
+size = Vector3(1, 6, 6)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, -10)
+size = Vector3(1, 6, 14)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2.5, 3.5)
+size = Vector3(6, 6, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2.5, -3.5)
+size = Vector3(6, 6, 1)
+
+[node name="enterElevator" parent="main" instance=ExtResource("5_473xg")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Anims" type="Node" parent="main"]
+
+[node name="1" type="Node" parent="main/Anims" node_paths=PackedStringArray("animationPlayer")]
+script = ExtResource("6_bi4al")
+animationPlayer = NodePath("../../AnimationPlayer")
+animationName = "."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="main"]
+root_node = NodePath("../Anims")
+libraries = {
+"": SubResource("AnimationLibrary_qg03g")
+}
+
+[node name="Button" parent="main" instance=ExtResource("7_x6htm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.5, 0)
+oneShot = true
+
+[node name="FirePlate" parent="main" instance=ExtResource("8_0bmdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, -0.5, 5)
+burning = false
+
+[node name="Button2" parent="main" instance=ExtResource("7_x6htm")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 8.5, 0.5, 5)
+oneShot = true
+
+[node name="ExitElevator" parent="main" instance=ExtResource("9_squsx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -18.5)
+
+[node name="void" type="Node3D" parent="."]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="void"]
+material_override = ExtResource("5_65ab4")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -1, -6.5)
+size = Vector3(11, 1, 29)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 8.5)
+size = Vector3(11, 7, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2, -8.5)
+size = Vector3(5, 7, 1)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, -12)
+size = Vector3(1, 7, 6)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2, -15.5)
+size = Vector3(8, 7, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2, -2.5)
+size = Vector3(6, 7, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, -3)
+size = Vector3(1, 7, 24)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 0)
+size = Vector3(1, 7, 4)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 2, 0)
+size = Vector3(1, 7, 16)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2, 2.5)
+size = Vector3(6, 7, 1)
+
+[node name="soulPlate" parent="void/CSGCombiner3D" instance=ExtResource("11_0plwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, -0.5, -12)
+burning = true
+
+[connection signal="pushed" from="main/Button" to="main/Anims/1" method="play"]
+[connection signal="pushed" from="main/Button2" to="main/FirePlate" method="toggleBurn"]
+[connection signal="goDown" from="main/ExitElevator" to="." method="exit"]

@@ -1,0 +1,184 @@
+[gd_scene load_steps=18 format=3 uid="uid://c2jaboymvo06a"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_2feur"]
+[ext_resource type="Environment" uid="uid://bfpl4yimwb7yi" path="res://Environments/Normal.tres" id="2_67r3k"]
+[ext_resource type="Environment" uid="uid://cjau3e4i1ogfb" path="res://Environments/Void.tres" id="3_8abu0"]
+[ext_resource type="Material" uid="uid://yjefk62b6jiv" path="res://textures/Sci-Fi_Padded_Fabric_002.tres" id="4_vgn1d"]
+[ext_resource type="PackedScene" uid="uid://b3ss483xjxny6" path="res://Scenes/enter_elevator.tscn" id="5_15hdl"]
+[ext_resource type="PackedScene" uid="uid://ctnr8ufwem0pp" path="res://Scenes/exitelevator.tscn" id="5_tj2jg"]
+[ext_resource type="Script" path="res://scripts/animationplayer.gd" id="6_ewvno"]
+[ext_resource type="PackedScene" uid="uid://y3tfqhredlag" path="res://Scenes/fire_plate.tscn" id="6_wd84v"]
+[ext_resource type="Material" uid="uid://c8dlq6bovgv13" path="res://textures/Fabric_Padded_Polyester_001.tres" id="7_k1gr0"]
+[ext_resource type="PackedScene" uid="uid://ca7rytr2o8lxf" path="res://Scenes/Interactables/button.tscn" id="10_7gxoi"]
+[ext_resource type="PackedScene" uid="uid://q4fhbjd4d8hm" path="res://Scenes/soul_plate.tscn" id="11_8i3vl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ojege"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_2mblm"]
+sky_material = SubResource("ProceduralSkyMaterial_ojege")
+
+[sub_resource type="Environment" id="Environment_5wt1d"]
+background_mode = 2
+sky = SubResource("Sky_2mblm")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Animation" id="Animation_mwvic"]
+resource_name = "."
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGCombiner3D/CSGBox3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.76599, 7.09469), Vector3(0, 5, 7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CSGCombiner3D/CSGBox3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.523599, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_m1hi8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGCombiner3D/CSGBox3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.76599, 7.09469)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CSGCombiner3D/CSGBox3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.523599, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b1al2"]
+_data = {
+".": SubResource("Animation_mwvic"),
+"RESET": SubResource("Animation_m1hi8")
+}
+
+[node name="level_3" type="Node3D"]
+script = ExtResource("1_2feur")
+normalEnvironment = ExtResource("2_67r3k")
+voidEnvironment = ExtResource("3_8abu0")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5wt1d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="main" type="Node3D" parent="."]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="main"]
+material_override = ExtResource("4_vgn1d")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1.76599, 7.09469)
+size = Vector3(6, 1, 13.064)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 4.5, 10.5)
+size = Vector3(1, 10, 16)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 4.5, 10.5)
+size = Vector3(1, 10, 16)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 19)
+size = Vector3(6, 5, 1)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 8.5)
+size = Vector3(6, 1, 22)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -3)
+size = Vector3(6, 5, 1)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 7.5, 0)
+size = Vector3(1, 4, 5)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 7.5, 0)
+size = Vector3(1, 4, 5)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 10.5)
+size = Vector3(6, 1, 16)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="main/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 15.5)
+size = Vector3(6, 1, 6)
+
+[node name="enterElevator" parent="main" instance=ExtResource("5_15hdl")]
+
+[node name="Node" type="Node" parent="main" node_paths=PackedStringArray("animationPlayer")]
+script = ExtResource("6_ewvno")
+animationPlayer = NodePath("../AnimationPlayer")
+animationName = "."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="main"]
+libraries = {
+"": SubResource("AnimationLibrary_b1al2")
+}
+
+[node name="Button" parent="main" instance=ExtResource("10_7gxoi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 16)
+oneShot = true
+
+[node name="ExitElevator" parent="main" instance=ExtResource("5_tj2jg")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -30, 0)
+
+[node name="FirePlate" parent="main" instance=ExtResource("6_wd84v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -2)
+
+[node name="void" type="Node3D" parent="."]
+visible = false
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="void"]
+material_override = ExtResource("7_k1gr0")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="void/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -31, 7.5)
+size = Vector3(6, 1, 22)
+
+[node name="soulPlate" parent="void" instance=ExtResource("11_8i3vl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30.5, 0)
+burning = true
+
+[connection signal="pushed" from="main/Button" to="main/Node" method="play"]
+[connection signal="goDown" from="main/ExitElevator" to="." method="exit"]

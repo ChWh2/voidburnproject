@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/Interactables/button.gd" id="1_hlxwk"]
 [ext_resource type="PackedScene" uid="uid://chm4iflvb8e7q" path="res://Scenes/Interactables/interact_point.tscn" id="1_rey6m"]
-[ext_resource type="Material" uid="uid://b003suo04c585" path="res://textures/Red/04.tres" id="2_1f4pc"]
-[ext_resource type="Material" uid="uid://fluyr04rcato" path="res://textures/Dark/02.tres" id="3_v88hs"]
+[ext_resource type="Material" uid="uid://cqfm37r04vbl4" path="res://textures/08.tres" id="3_jf1xb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_17gxs"]
+albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ol1lk"]
 top_radius = 0.4
@@ -12,6 +14,21 @@ height = 0.1
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ptf6v"]
 height = 0.2
+
+[sub_resource type="Animation" id="Animation_3ui85"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Button:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.25, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_8ibfp"]
 resource_name = "push"
@@ -30,21 +47,6 @@ tracks/0/keys = {
 "values": [Vector3(0, 0.25, 0), Vector3(0, 0.16, 0), Vector3(0, 0.25, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_3ui85"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Button:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.25, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x0whq"]
 _data = {
 "RESET": SubResource("Animation_3ui85"),
@@ -60,12 +62,12 @@ interactText = "E"
 
 [node name="Button" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-material_override = ExtResource("2_1f4pc")
+material_override = SubResource("StandardMaterial3D_17gxs")
 mesh = SubResource("CylinderMesh_ol1lk")
 
 [node name="Base" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-material_override = ExtResource("3_v88hs")
+material_override = ExtResource("3_jf1xb")
 mesh = SubResource("CylinderMesh_ptf6v")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://c8dlq6bovgv13"]
+
+[ext_resource type="Texture2D" uid="uid://dxq8e1w0apser" path="res://textures/Fabric_Padded_Polyester_001_SD/Fabric_polyester_003_basecolor.jpg" id="1_tvbav"]
+[ext_resource type="Texture2D" uid="uid://b5o7qseb8yvbq" path="res://textures/Fabric_Padded_Polyester_001_SD/Fabric_polyester_003_ambientOcclusion.jpg" id="2_libxx"]
+[ext_resource type="Texture2D" uid="uid://bgh7hgel6370r" path="res://textures/Fabric_Padded_Polyester_001_SD/Fabric_polyester_003_normal.jpg" id="4_trsal"]
+[ext_resource type="Texture2D" uid="uid://vgavwnf2wp2n" path="res://textures/Fabric_Padded_Polyester_001_SD/Fabric_polyester_003_roughness.jpg" id="5_or4n1"]
+
+[resource]
+albedo_texture = ExtResource("1_tvbav")
+roughness_texture = ExtResource("5_or4n1")
+normal_enabled = true
+normal_texture = ExtResource("4_trsal")
+ao_enabled = true
+ao_texture = ExtResource("2_libxx")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true

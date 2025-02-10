@@ -11,6 +11,8 @@ var plr : player
 @export var normalEnvironment : Environment
 @export var voidEnvironment : Environment
 
+signal nextLevel(inVoid : bool, exitPos : Vector3)
+
 func _ready():
 	afterlife.position.y += 1000.0
 	
@@ -40,3 +42,7 @@ func toggleWorld():
 		enterMain()
 	else:
 		enterVoid()
+
+func exit(inVoid : bool, exitPos : Vector3):
+	nextLevel.emit(inVoid, exitPos)
+	print("emitLevel")

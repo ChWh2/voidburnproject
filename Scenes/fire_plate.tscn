@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://y3tfqhredlag"]
+[gd_scene load_steps=11 format=3 uid="uid://y3tfqhredlag"]
 
 [ext_resource type="Script" path="res://scripts/Fire.gd" id="1_s6gac"]
-[ext_resource type="Material" uid="uid://fluyr04rcato" path="res://textures/Dark/02.tres" id="2_c1in5"]
+[ext_resource type="Material" uid="uid://cqfm37r04vbl4" path="res://textures/08.tres" id="2_6bggx"]
+[ext_resource type="Texture2D" uid="uid://lwe2s0rpw46c" path="res://textures/fire.bmp" id="3_725hb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_li0ls"]
 size = Vector3(2, 3, 2)
@@ -11,16 +12,14 @@ top_radius = 2.0
 bottom_radius = 2.0
 height = 0.1
 
-[sub_resource type="Gradient" id="Gradient_07m0e"]
-offsets = PackedFloat32Array(0.121951, 0.804878, 1)
-colors = PackedColorArray(1, 0, 0, 1, 1, 0.487805, 0, 1, 1, 1, 0, 1)
+[sub_resource type="Gradient" id="Gradient_s27fa"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.487805, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vw2kn"]
-gradient = SubResource("Gradient_07m0e")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ts88p"]
+gradient = SubResource("Gradient_s27fa")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ix0di"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jpfki"]
 lifetime_randomness = 1.0
-emission_shape_scale = Vector3(1, 2, 1)
 emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.0
@@ -28,15 +27,17 @@ emission_ring_radius = 1.75
 emission_ring_inner_radius = 0.0
 direction = Vector3(0, 1, 0)
 spread = 15.0
-initial_velocity_min = 5.0
-initial_velocity_max = 10.0
-color_ramp = SubResource("GradientTexture1D_vw2kn")
+initial_velocity_min = 9.0
+initial_velocity_max = 9.0
+color_ramp = SubResource("GradientTexture1D_ts88p")
 turbulence_influence_min = 0.496
 turbulence_influence_max = 0.596
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_we3xl"]
+transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_725hb")
 billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
@@ -44,7 +45,6 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_wns5w"]
 material = SubResource("StandardMaterial3D_we3xl")
-size = Vector2(0.1, 0.1)
 
 [node name="FirePlate" type="Area3D"]
 script = ExtResource("1_s6gac")
@@ -56,14 +56,15 @@ shape = SubResource("BoxShape3D_li0ls")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-material_override = ExtResource("2_c1in5")
+material_override = ExtResource("2_6bggx")
 mesh = SubResource("CylinderMesh_3fu7u")
 
 [node name="Fire" type="GPUParticles3D" parent="."]
 cast_shadow = 0
-amount = 10000
+emitting = false
+amount = 500
 lifetime = 0.5
-process_material = SubResource("ParticleProcessMaterial_ix0di")
+process_material = SubResource("ParticleProcessMaterial_jpfki")
 draw_pass_1 = SubResource("QuadMesh_wns5w")
 
 [node name="Timer" type="Timer" parent="."]

@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://ob20exr3g54y"]
+[gd_scene load_steps=7 format=3 uid="uid://ob20exr3g54y"]
 
 [ext_resource type="Script" path="res://scripts/gameManager.gd" id="1_c67xe"]
-[ext_resource type="PackedScene" uid="uid://c7m5p35breqkb" path="res://levels/level_0.tscn" id="2_ah31y"]
+[ext_resource type="PackedScene" uid="uid://c7m5p35breqkb" path="res://Scenes/levels/level_0.tscn" id="2_ah31y"]
 [ext_resource type="PackedScene" uid="uid://dmpe5v8nvybmk" path="res://Scenes/player.tscn" id="3_7mfwb"]
+[ext_resource type="PackedScene" uid="uid://dmr4afevvsill" path="res://Scenes/levels/level_1.tscn" id="3_gli75"]
+[ext_resource type="PackedScene" uid="uid://diuis5516d46u" path="res://Scenes/levels/level_2.tscn" id="4_4fu6i"]
+[ext_resource type="PackedScene" uid="uid://c2jaboymvo06a" path="res://Scenes/levels/level_3.tscn" id="5_bu4rk"]
 
 [node name="Main" type="Node3D" node_paths=PackedStringArray("plr")]
 script = ExtResource("1_c67xe")
-levels = Array[PackedScene]([ExtResource("2_ah31y")])
+levels = Array[PackedScene]([ExtResource("2_ah31y"), ExtResource("3_gli75"), ExtResource("4_4fu6i"), ExtResource("5_bu4rk")])
 plr = NodePath("Player")
 
 [node name="Player" parent="." instance=ExtResource("3_7mfwb")]
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="revive" from="Player" to="." method="_on_player_revive"]
